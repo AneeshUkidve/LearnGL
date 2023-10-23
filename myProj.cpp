@@ -99,7 +99,7 @@ int main()
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	//version2
 	
 	//Triangle code below
 	float vertices[] = {
