@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h> 
 #include <shader.h>
+#include <cmath>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -76,10 +77,15 @@ float vertices[] = {
 	while(!glfwWindowShouldClose(window))
 	{
 		processInput(window);
-		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+		glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
+	
+	    float timeValue = glfwGetTime();
+		float offset1 = sin(timeValue) / 2.0f;
+		float offset2 = cos(timeValue) / 2.0f;
 		ourShader.use();
+		ourShader.setFloat("offSet1", offset1);
+		ourShader.setFloat("offSet2", offset2);
 
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
