@@ -3,12 +3,16 @@
 #include <GLFW/glfw3.h> 
 #include <shader.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <stb_image.h>
 #include <cmath>
 =======
 >>>>>>> c0e4f66 (We have class shader and different files for)
 
 float vis = 0.0f;
+=======
+#include <cmath>
+>>>>>>> 5ca42b6 (fun with shaders complete)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -167,6 +171,7 @@ int main()
 	while(!glfwWindowShouldClose(window))
 	{
 		processInput(window);
+<<<<<<< HEAD
 		glClearColor(0.0f, 0.2f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	
@@ -179,7 +184,17 @@ int main()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 =======
+=======
+		glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+	
+	    float timeValue = glfwGetTime();
+		float offset1 = sin(timeValue) / 2.0f;
+		float offset2 = cos(timeValue) / 2.0f;
+>>>>>>> 5ca42b6 (fun with shaders complete)
 		ourShader.use();
+		ourShader.setFloat("offSet1", offset1);
+		ourShader.setFloat("offSet2", offset2);
 
 >>>>>>> c0e4f66 (We have class shader and different files for)
         glBindVertexArray(VAO);
