@@ -4,6 +4,9 @@
 #include <shader.h>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 790804c (my lord this was a fun one)
 #include <stb_image.h>
 #include <cmath>
 =======
@@ -121,6 +124,7 @@ int main()
 	
 	//Triangle code below
 	float vertices[] = {
+<<<<<<< HEAD
 		0.5f,  0.5f, 0.0f,  // top right
 		0.5f, -0.5f, 0.0f,  // bottom right
 		-0.5f, -0.5f, 0.0f,  // bottom left
@@ -131,6 +135,24 @@ int main()
 		1, 2, 0    // second triangle
 	};  
 
+=======
+		// positions         // colors
+		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+	};    
+	
+	//Texture stuff ahead 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	
+	float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
+>>>>>>> 790804c (my lord this was a fun one)
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -175,6 +197,7 @@ int main()
 	{
 		processInput(window);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		glClearColor(0.0f, 0.2f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	
@@ -199,9 +222,12 @@ int main()
 =======
 		float offset2 = cos(timeValue/2.0f) / 2.0f;
 >>>>>>> 897f1c4 (savepoint)
+=======
+		glClearColor(0.0f, 0.2f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+	
+>>>>>>> 790804c (my lord this was a fun one)
 		ourShader.use();
-		ourShader.setFloat("offSet1", offset1);
-		ourShader.setFloat("offSet2", offset2);
 
 >>>>>>> c0e4f66 (We have class shader and different files for)
         glBindVertexArray(VAO);
