@@ -163,10 +163,13 @@ int main()
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	std::cout << "Main" << std::endl;
+<<<<<<< HEAD
 	ourShader.use();
 	ourShader.setInt("otexture1", 0);
 	ourShader.setInt("otexture2", 1);
 	ourShader.setFloat("visiblity", vis);
+=======
+>>>>>>> 897f1c4 (savepoint)
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -190,8 +193,12 @@ int main()
 	
 	    float timeValue = glfwGetTime();
 		float offset1 = sin(timeValue) / 2.0f;
+<<<<<<< HEAD
 		float offset2 = cos(timeValue) / 2.0f;
 >>>>>>> 5ca42b6 (fun with shaders complete)
+=======
+		float offset2 = cos(timeValue/2.0f) / 2.0f;
+>>>>>>> 897f1c4 (savepoint)
 		ourShader.use();
 		ourShader.setFloat("offSet1", offset1);
 		ourShader.setFloat("offSet2", offset2);
