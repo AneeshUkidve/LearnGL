@@ -47,13 +47,13 @@ int main()
 	
 	//Triangle code below
 	float vertices[] = {
-		-0.5f,  0.5f, 0.0f, //top left
-		-0.5f, -0.5f, 0.0f, //bottom left
-		 0.5f,  0.5f, 0.0f, //top right
-	 	 0.5f, -0.5f, 0.0f  //bottom right
+		-0.1f,  0.1f, 0.0f, //top left
+		-0.1f, -0.1f, 0.0f, //bottom left
+		 0.1f,  0.1f, 0.0f, //top right
+	 	 0.1f, -0.1f, 0.0f  //bottom right
 	};    
 
-	float indices[] = {
+	unsigned int indices[] = {
 		0, 1, 2,
 		1, 2, 3
 	};
@@ -89,12 +89,12 @@ int main()
 	while(!glfwWindowShouldClose(window))
 	{
 		processInput(window);
-		glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-	
+
 	    float timeValue = glfwGetTime();
-		float offset1 = sin(timeValue) / 2.0f;
-		float offset2 = cos(timeValue) / 2.0f;
+		float offset1 = sin(timeValue) * 0.9f;
+		float offset2 = cos((timeValue*2)/(-3)) * 0.9f;
 		ourShader.use();
 		ourShader.setFloat("offSet1", offset1);
 		ourShader.setFloat("offSet2", offset2);

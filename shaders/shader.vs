@@ -4,6 +4,5 @@ uniform float offSet1, offSet2;
 out vec3 ourColor;
 void main(){
     gl_Position = vec4(aPos.x + offSet1, aPos.y + offSet2, aPos.z, 1.0);
-    ourColor = vec3(0.0, 0.0, 0.0);
-    //ourColor = vec3((aPos.x + offSet1 + 1)/2, (aPos.y + offSet2 + 1)/2, 0.5);
+    ourColor = vec3((aPos.x + offSet1 + 1)/2, (aPos.y + offSet2 + 1)/2, 0.5);
 };
