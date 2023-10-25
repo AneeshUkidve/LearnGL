@@ -17,6 +17,8 @@ float vis = 0.0f;
 #include <cmath>
 >>>>>>> 5ca42b6 (fun with shaders complete)
 
+float vis = 0.0f;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -125,6 +127,7 @@ int main()
 	//Triangle code below
 	float vertices[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		0.5f,  0.5f, 0.0f,  // top right
 		0.5f, -0.5f, 0.0f,  // bottom right
 		-0.5f, -0.5f, 0.0f,  // bottom left
@@ -141,8 +144,26 @@ int main()
 		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
 		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
 	};    
+=======
+		// positions          // colors           // texture coords
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+	};
+>>>>>>> 44b3788 (everything works)
 	
+	unsigned int indices[] = {
+		0, 1, 2,
+		0, 2, 3
+	};
+
 	//Texture stuff ahead 
+	
+	unsigned int texture1;
+	glGenTextures(1, &texture1);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	
@@ -151,8 +172,49 @@ int main()
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height, nrChannels;
+	unsigned char *data = stbi_load("textures/container.jpg", &width, &height, &nrChannels, 0);
+
+	if (data){
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else{
+		std::cout << "FAILED TO LOAD TEXTURE" << std::endl;
+	}
+	stbi_image_free(data);
+
+	unsigned int texture2;
+	glGenTextures(1, &texture2);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	
+<<<<<<< HEAD
 >>>>>>> 790804c (my lord this was a fun one)
+=======
+	//borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char *data2 = stbi_load("textures/awesomeface.png", &width, &height, &nrChannels, 0);
+
+	if (data2){
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else{
+		std::cout << "FAILED TO LOAD TEXTURE" << std::endl;
+	}
+	stbi_image_free(data2);
+
+
+>>>>>>> 44b3788 (everything works)
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -186,12 +248,18 @@ int main()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	std::cout << "Main" << std::endl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 44b3788 (everything works)
 	ourShader.use();
 	ourShader.setInt("otexture1", 0);
 	ourShader.setInt("otexture2", 1);
 	ourShader.setFloat("visiblity", vis);
+<<<<<<< HEAD
 =======
 >>>>>>> 897f1c4 (savepoint)
+=======
+>>>>>>> 44b3788 (everything works)
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -205,10 +273,14 @@ int main()
 		ourShader.setFloat("visiblity", vis);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 44b3788 (everything works)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
+<<<<<<< HEAD
 =======
 =======
 		glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
@@ -230,6 +302,8 @@ int main()
 		ourShader.use();
 
 >>>>>>> c0e4f66 (We have class shader and different files for)
+=======
+>>>>>>> 44b3788 (everything works)
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
