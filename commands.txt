@@ -1,1 +1,0 @@
-g++ myProj.cpp -L/home/tanta/Coding/LearnGL/glfw/build/src -lGL -lglfw3 -I/home/tanta/Coding/LearnGL/glfw/include
