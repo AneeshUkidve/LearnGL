@@ -8,8 +8,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-float vis = 0.0f;
 
+int pass = 0;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -20,12 +20,10 @@ void processInput(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 	if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
-		if(vis < 1.0)
-			vis = vis + 0.01f;
+		pass = 0;
 	}
 	if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
-		if(vis > 0.0)
-			vis = vis - 0.01f;
+		pass = 0;
 	}
 }
 
@@ -162,32 +160,6 @@ int main()
 	}
 	stbi_image_free(data);
 
-	unsigned int texture2;
-	glGenTextures(1, &texture2);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	
-	//borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data2 = stbi_load("textures/awesomeface.png", &width, &height, &nrChannels, 0);
-
-	if (data2){
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else{
-		std::cout << "FAILED TO LOAD TEXTURE" << std::endl;
-	}
-	stbi_image_free(data2);
-	stbi_set_flip_vertically_on_load(false);
-
 
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
@@ -213,9 +185,7 @@ int main()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	std::cout << "Main" << std::endl;
 	ourShader.use();
-	ourShader.setInt("otexture1", 0);
-	ourShader.setInt("otexture2", 1);
-	ourShader.setFloat("visiblity", vis);
+	ourShader.setInt("texture1", 0);
 
 
 	while(!glfwWindowShouldClose(window))
@@ -226,7 +196,6 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 		ourShader.use();
-		ourShader.setFloat("visiblity", vis);
 		
         glm::mat4 model         = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
         glm::mat4 view          = glm::mat4(1.0f);
@@ -238,8 +207,6 @@ int main()
 		
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texture2);
         glBindVertexArray(VAO);
 		float time = glfwGetTime();
 		model = glm::rotate(model, glm::radians(time * 60), glm::vec3(1.0f, 0.0f, 0.0f));
